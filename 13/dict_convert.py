@@ -19,4 +19,4 @@ def dict2nt(dict_):
 
 
 def nt2json(nt):
-    return dict(nt._asdict())
+    return json.dumps(dict(nt._asdict()),default=str)
