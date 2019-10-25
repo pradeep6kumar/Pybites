@@ -2,9 +2,13 @@ import csv
 from pathlib import Path
 from urllib.request import urlretrieve
 import re
+<<<<<<< HEAD
 
 tmp = Path('/tmp')
 #tmp = Path('/Users/pradeepkumar/temp/')
+=======
+tmp = Path('D:/Pbytes/')
+>>>>>>> 444b9e3e3c354fb4194c9052127c30f4ae496852
 stats = tmp / 'bites.csv'
 
 if not stats.exists():
@@ -17,6 +21,7 @@ def get_most_complex_bites(N=10, stats=stats):
        Return a list of Bite IDs (int or str values are fine) of the N
        most complex Bites.
     """
+<<<<<<< HEAD
     with open(stats, 'r', encoding='utf-8-sig') as f:
         data = f.read().split('\n')
 
@@ -32,6 +37,31 @@ def get_most_complex_bites(N=10, stats=stats):
     return fitems
 
 
+=======
+    with open(stats, 'r', encoding = "utf-8-sig") as f:
+        data = f.read().split('\n')
+    
+    newitems = []
+    for item in data:
+        x = item.split(';')
+        #print(x[1])
+        if x[1] == 'None':
+            x[1] = 0
+        #print(x)
+        newitems.append(x)
+        
+    dict_ = dict(newitems[1:])
+    #print(dict_.items())
+    sdict_ = sorted(dict_.items(), key = lambda x: float(x[1]), reverse=True)
+    result = sdict_[0:N]
+    out = []
+    for item in result:
+        out.extend(re.findall(r'(?<=Bite )\d+', item[0]))
+        
+    return out
+    
+    
+>>>>>>> 444b9e3e3c354fb4194c9052127c30f4ae496852
 if __name__ == '__main__':
     res = get_most_complex_bites()
     print(res)
